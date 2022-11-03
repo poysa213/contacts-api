@@ -7,7 +7,7 @@ class Contact(models.Model):
     name = models.CharField(max_length=70)
     phone_number = models.CharField(max_length=70)
     email = models.CharField(max_length=70, blank=True)
-    location = models.CharField(max_length=70)
+    location = models.CharField(max_length=70, blank=True)
     is_favorite = models.BooleanField(default=False)
     added_at = models.DateTimeField(auto_now=True)
     
