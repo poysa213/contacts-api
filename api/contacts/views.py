@@ -3,7 +3,6 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import BasicAuthentication
 
-from knox.auth import TokenAuthentication
 
 from .serializers import ContactSerializer
 from .models import Contact
@@ -12,7 +11,6 @@ from .models import Contact
 
 class ContactViewset(ModelViewSet):
 
-    authentication_classes = [ BasicAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticated]
     
     queryset = Contact.objects.all()
