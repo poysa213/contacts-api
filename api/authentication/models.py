@@ -1,51 +1,53 @@
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from rest_framework import status
+from django.contrib import auth
+# Create your views here.
+
 
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, phone_number, password=None):
+
+    use_in_migration = True
+
+    def create_user(self, email, password=None, **extra_fields):
         if not email:
-            raise ValueError('Users must have an phone number')
-
-        if not phone_number:
-            raise ValueError('Users must have an email address')
-
-        user = self.model(
-            email=self.normalize_email(email),
-            phone_number=phone_number
-        )
-
+            raise ValueError('Email is Required')
+        user = self.model(email=self.normalize_email(email), **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
+    def create_superuser(self, email, password, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        extra_fields.setdefault('is_active', True)
 
-    def create_superuser(self, email, password, username, phone_number):
-        """
-        Creates and saves a superuser with the given email and password.
-        """
-        user = self.create_user(
-            username=username,
-            email=email,
-            password=password,
-            phone_number=phone_number
-        )
-        user.staff = True
-        user.admin = True
-        user.save(using=self._db)
-        return user
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError('Superuser must have is_staff = True')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser = True')
+
+        return self.create_user(email, password, **extra_fields)
 
 
 class User(AbstractUser):
-    email = models.EmailField(blank=True, unique=True)
-    phone_number = models.CharField(max_length=20, unique=True)
 
-
-
+    username = None
+    phone_number = models.CharField(max_length=50, unique=True)
+    email = models.EmailField(max_length=100, unique=True)
+    date_joined = models.DateTimeField(auto_now_add=True)
+    is_admin = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
+    
+    objects = UserManager()
+    
+    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['phone_number']
 
-    objects = UserManager()
-
-
-   
+    def __str__(self):
+        return self.phone_number
 
