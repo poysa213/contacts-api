@@ -12,6 +12,5 @@ router.register('', ContactViewset, basename='carts-items')
 
 urlpatterns = [
     path('', include(router.urls)),
-
 ]
 

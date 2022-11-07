@@ -1,37 +1,62 @@
 from rest_framework import serializers
-from .models import User
+# from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth.models import User
 
-
+from django.contrib.auth.hashers import make_password
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
-    email = serializers.EmailField(max_length=100, min_length=4),
+    email = serializers.EmailField(max_length=100, min_length=4)
     first_name = serializers.CharField(max_length=50, min_length=2)
     last_name = serializers.CharField(max_length=50, min_length=2)
-    phone_number = serializers.CharField(max_length=50, min_length=6)
 
     class Meta:
         model = User
-        fields = ['id', 'phone_number', 'first_name', 'last_name', 'email', 'password']
+        fields = ['id','username', 'first_name', 'last_name', 'email', 'password']
+       
+   
 
     def validate(self, attrs):
         email = attrs.get('email', '')
         if User.objects.filter(email=email).exists():
             raise serializers.ValidationError(
                 {'email': ('Email is already in use')})
-        phone_number = attrs.get('phone_number', '')
-        if User.objects.filter(phone_number=phone_number).exists():
-            raise serializers.ValidationError(
-                {'email': ('phone_number is already in use')})
         return super().validate(attrs)
 
     def create(self, validated_data):
-        return User.objects.create_user(**validated_data)
+        validated_data['password'] = make_password(validated_data['password'])
+        return super(UserSerializer, self).create(validated_data)
 
+     
 class RegisterSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id','phone_number','password','first_name', 'last_name')
+        fields = ('id', 'username', 'email', 'password','first_name', 'last_name')
         extra_kwargs = {
             'password':{'write_only': True},
         }
+
+    def create(self, validated_data):
+        user = User(
+        email=validated_data['email'],
+        username=validated_data['username'],
+        password=make_password(validated_data['password'])
+             )
+        # user.set_password(make_password(validated_data['password']))
+        user.save()
+        return user
+
+
+
+
+
+
+# class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+
+#     @classmethod
+#     def get_token(cls, user):
+#         token = super(MyTokenObtainPairSerializer, cls).get_token(user)
+
+#         # Add custom claims
+#         token['username'] = user.username
+#         return token

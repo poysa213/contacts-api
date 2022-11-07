@@ -1,13 +1,11 @@
-from django.contrib.auth import get_user_model
-
-
+# from django.contrib.auth import get_user_model
 
 from rest_framework import serializers
-
+from django.contrib.auth.models import User
 
 from .models import Contact
 
-User = get_user_model()
+# User = get_user_model()
 
 class OwnerSerializer(serializers.ModelSerializer):
     class Meta:
