@@ -12,7 +12,7 @@ Contacts api with django rest framework
 
 ### API Endpoints
 | HTTP Verbs | Endpoints | Action |  
-| --- | --- | --- | --- |
+| --- | --- | --- 
 | POST | /api/contacts/ | Create a new contact | 
 | GET | /api/contacts/ | Get all contacts |  
 | GET | /api/contacts/pk | Get a single contact |
