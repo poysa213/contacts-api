@@ -8,6 +8,9 @@ django = "==4.1"
 djangorestframework = "==3.14"
 pyjwt = "*"
 djangorestframework-simplejwt = {extras = ["crypto"], version = "*"}
+django-on-heroku = "*"
+gunicorn = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 
