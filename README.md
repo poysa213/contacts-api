@@ -1,5 +1,6 @@
 # contacts-api
 Contacts api with django rest framework
+Allow you to save your contacts (phone_number) with their names.
 
 ### Features
 * JWTAuthentication
