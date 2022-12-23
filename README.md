@@ -21,8 +21,8 @@ Allow you to save your contacts (phone_number) with their names.
 | DELETE | /api/contacts/pk | Delete a contact | 
 | POST | /api/auth/register/ | Create an account |
 | POST | /api/auth/token/ | Get you token(refresh&acces) |
-| POST | /api/auth/token/verify/ | Verify yoour token | 
-| POST | /api/auth/token/regresh/ | Refresh yoour token | 
+| POST | /api/auth/token/verify/ | Verify your token | 
+| POST | /api/auth/token/refresh/ | Refresh your token | 
 
  
  
