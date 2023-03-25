@@ -31,7 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-7*m32de_h)t%ozcsoy1a%=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', False)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 
 
 # Application definition
