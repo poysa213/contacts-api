@@ -1,3 +1,5 @@
+from django.http import JsonResponse
+
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
@@ -28,3 +30,9 @@ class ContactViewset(ModelViewSet):
         return Response(serializer.data)
     
 
+
+def handler404(request, *args, **kwargs):
+    return JsonResponse({"message":"Wow you are in the dark web!"})
+
+def handler500(request, *args, **kwargs):
+    return JsonResponse({"message":"OMG you break the usa!"})
