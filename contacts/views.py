@@ -31,8 +31,8 @@ class ContactViewset(ModelViewSet):
     
 
 
-def handler404(request, *args, **kwargs):
-    return JsonResponse({"message":"Wow you are in the dark web!"})
+# def handler404(request, *args, **kwargs):
+#     return JsonResponse({"message":"Wow you are in the dark web!"})
 
-def handler500(request, *args, **kwargs):
-    return JsonResponse({"message":"OMG you break the usa!"})
+# def handler500(request, *args, **kwargs):
+#     return JsonResponse({"message":"OMG you break the usa!"})
