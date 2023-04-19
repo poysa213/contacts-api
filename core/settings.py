@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY','django-insecure-7*m32de_h)t%ozcsoy1a%=
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = os.environ.get('DEBUG', False)
-DEBUG= False
+DEBUG= True
 
 ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1']
 
@@ -90,12 +90,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('DB_NAME'),
-        'USER': os.environ.get('DB_USER'),
-        'HOST': os.environ.get('DB_HOST'),
-        'PASSWORD': os.environ.get('DB_PASSWORD'),
-        'PORT': os.environ.get('DB_PORT'),
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR /  'db.sqlite3',
+        # 'USER': os.environ.get('DB_USER'),
+        # 'HOST': os.environ.get('DB_HOST'),
+        # 'PASSWORD': os.environ.get('DB_PASSWORD'),
+        # 'PORT': os.environ.get('DB_PORT'),
         
     }
 }
@@ -148,7 +148,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
-        # 'rest_framework.renderers.JSONRenderer',
+        
         'rest_framework.renderers.BrowsableAPIRenderer',
     ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
