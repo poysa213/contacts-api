@@ -10,5 +10,5 @@ urlpatterns = [
 ]
 
 
-# handler404 = 'contacts.views.handler404'
-# handler500 = 'contacts.views.handler500'
+handler404 = 'contacts.views.handler404'
+handler500 = 'contacts.views.handler500'
